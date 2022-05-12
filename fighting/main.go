@@ -36,20 +36,15 @@ func play(player1Cards *[5]Card, player2Cards *[5]Card) {
 		println("Turn ", i+1)
 		println("=====")
 
-		// var attackCard *Card
-		// var defenseCard *Card
-
-		// pointer to element from array
-
 		var attackCard *Card
 		var defenseCard *Card
 
 		if whoseTurn == "player1" {
-			attackCard = &player1Cards[rand.Intn(len(player1Cards))]
-			defenseCard = &player2Cards[rand.Intn(len(player2Cards))]
+			attackCard = findRandomAliveCard(player1Cards)
+			defenseCard = findRandomAliveCard(player2Cards)
 		} else if whoseTurn == "player2" {
-			attackCard = &player2Cards[rand.Intn(len(player2Cards))]
-			defenseCard = &player1Cards[rand.Intn(len(player1Cards))]
+			attackCard = findRandomAliveCard(player2Cards)
+			defenseCard = findRandomAliveCard(player1Cards)
 		}
 
 		attack(attackCard, defenseCard)
@@ -62,6 +57,21 @@ func play(player1Cards *[5]Card, player2Cards *[5]Card) {
 
 		printBoard(*player1Cards, *player2Cards)
 	}
+}
+
+func findRandomAliveCard(cards *[5]Card) *Card {
+	var aliveCardIndexes = make([]int, 0)
+
+	for i := 0; i < len(cards); i++ {
+		if cards[i].status == "alive" {
+			aliveCardIndexes = append(aliveCardIndexes, i)
+		}
+	}
+
+	var randomCardIndex int = aliveCardIndexes[rand.Intn(len(aliveCardIndexes))]
+	var randomCard *Card = &cards[randomCardIndex]
+
+	return randomCard
 }
 
 func attack(offensiveCard *Card, defensiveCard *Card) {
