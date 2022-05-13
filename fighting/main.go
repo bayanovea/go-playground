@@ -30,10 +30,11 @@ func fillCards(cards *[5]Card) {
 
 func play(player1Cards *[5]Card, player2Cards *[5]Card) {
 	var whoseTurn = "player1"
+	var turnNumber int = 1
 
-	for i := 0; i < 5; i++ {
+	for {
 		println("=====")
-		println("Turn ", i+1)
+		println("Turn ", turnNumber)
 		println("=====")
 
 		var attackCard *Card
@@ -56,7 +57,28 @@ func play(player1Cards *[5]Card, player2Cards *[5]Card) {
 		}
 
 		printBoard(*player1Cards, *player2Cards)
+
+		var canFinishGame bool
+		var winner string
+		canFinishGame, winner = handleAfterTurn(player1Cards, player2Cards)
+
+		if canFinishGame {
+			println(winner, " won!")
+			break
+		}
+
+		turnNumber++
 	}
+}
+
+func isAllCardsDead(cards *[5]Card) bool {
+	for i := 0; i < len(cards); i++ {
+		if cards[i].status == "alive" {
+			return false
+		}
+	}
+
+	return true
 }
 
 func findRandomAliveCard(cards *[5]Card) *Card {
@@ -84,6 +106,27 @@ func attack(offensiveCard *Card, defensiveCard *Card) {
 	if defensiveCard.health <= 0 {
 		defensiveCard.status = "dead"
 	}
+}
+
+func handleAfterTurn(player1Cards *[5]Card, player2Cards *[5]Card) (canFinishGame bool, winner string) {
+	var canFinishGameVar bool = false
+	var winnerVar string
+
+	var isAllPlayer1CardsDead bool = isAllCardsDead(player1Cards)
+	var isAllPlayer2CardsDead bool = isAllCardsDead(player2Cards)
+
+	if isAllPlayer1CardsDead || isAllPlayer2CardsDead {
+		canFinishGameVar = true
+
+		if isAllPlayer1CardsDead {
+			winnerVar = "Player 2"
+		}
+		if isAllPlayer2CardsDead {
+			winnerVar = "Player 1"
+		}
+	}
+
+	return canFinishGameVar, winnerVar
 }
 
 func printBoard(player1Cards [5]Card, player2Cards [5]Card) {
