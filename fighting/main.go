@@ -1,8 +1,8 @@
 package main
 
 func main() {
-	var game1 = addNewGame()
-	var game2 = addNewGame()
+	var game1 = addNewGame("Game1")
+	var game2 = addNewGame("Game2")
 
 	var player1 = Player{hash: "player1", name: "Player 1"}
 	var player2 = Player{hash: "player2", name: "Player 2"}

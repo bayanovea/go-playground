@@ -7,13 +7,14 @@ import (
 
 type Game struct {
 	status  string
+	name    string
 	players []Player
 }
 
 var games []Game
 
-func addNewGame() Game {
-	var newGame = Game{status: "new"}
+func addNewGame(name string) Game {
+	var newGame = Game{name: name, status: "new"}
 	games = append(games, newGame)
 
 	return newGame
