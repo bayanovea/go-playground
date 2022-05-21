@@ -26,7 +26,7 @@ func playGame(game Game, player1Cards *[5]Card, player2Cards *[5]Card) {
 
 	for {
 		println("=====")
-		println("Turn ", turnNumber)
+		println("Game", "("+game.name+")", ",", "Turn", turnNumber)
 		println("=====")
 
 		var attackCard *Card
