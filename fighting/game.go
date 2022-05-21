@@ -1,5 +1,10 @@
 package main
 
+import (
+	"math/rand"
+	"time"
+)
+
 type Game struct {
 	status  string
 	players []Player
@@ -25,6 +30,8 @@ func playGame(game Game, player1Cards *[5]Card, player2Cards *[5]Card) {
 
 		var attackCard *Card
 		var defenseCard *Card
+
+		prepareToFight()
 
 		if whoseTurn == "player1" {
 			attackCard = findRandomAliveCard(player1Cards)
@@ -88,4 +95,11 @@ func handleAfterTurn(player1Cards *[5]Card, player2Cards *[5]Card) (canFinishGam
 	}
 
 	return canFinishGameVar, winnerVar
+}
+
+func prepareToFight() {
+	println("Troops are preparing to fight! ...")
+
+	var randomSleepDurationInSec = rand.Intn(3) + 1
+	time.Sleep(time.Duration(randomSleepDurationInSec) * time.Second)
 }

@@ -24,8 +24,8 @@ func main() {
 	fillCards(&game2player2Cards)
 
 	printBoard(game1player1Cards, game1player2Cards)
-	playGame(game1, &game1player1Cards, &game1player2Cards)
+	go playGame(game1, &game1player1Cards, &game1player2Cards)
 
-	printBoard(game2player1Cards, game2player2Cards)
+	go printBoard(game2player1Cards, game2player2Cards)
 	playGame(game2, &game2player1Cards, &game2player2Cards)
 }
