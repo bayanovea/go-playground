@@ -20,7 +20,7 @@ func addNewGame(name string) *Game {
 	return &newGame
 }
 
-func playGame(game *Game, player1Cards *[5]Card, player2Cards *[5]Card) {
+func playGame(game *Game, player1Cards *[5]Card, player2Cards *[5]Card, ch chan string) {
 	game.status = "active"
 
 	var whoseTurn = "player1"
@@ -106,4 +106,16 @@ func prepareToFight() {
 
 	var randomSleepDurationInSec = rand.Intn(3) + 1
 	time.Sleep(time.Duration(randomSleepDurationInSec) * time.Second)
+}
+
+func getActiveGames() []Game {
+	var activeGames []Game
+
+	for _, game := range games {
+		if game.status == "active" {
+			activeGames = append(activeGames, game)
+		}
+	}
+
+	return activeGames
 }

@@ -1,6 +1,14 @@
 package main
 
+import (
+	"fmt"
+)
+
 func main() {
+	go startGameEventsLoop()
+
+	var ch chan string = make(chan string)
+
 	var game1 = addNewGame("Game1")
 	var game2 = addNewGame("Game2")
 
@@ -24,8 +32,11 @@ func main() {
 	fillCards(&game2player2Cards)
 
 	printBoard(game1player1Cards, game1player2Cards)
-	go playGame(game1, &game1player1Cards, &game1player2Cards)
+	go playGame(game1, &game1player1Cards, &game1player2Cards, ch)
 
-	go printBoard(game2player1Cards, game2player2Cards)
-	playGame(game2, &game2player1Cards, &game2player2Cards)
+	printBoard(game2player1Cards, game2player2Cards)
+	go playGame(game2, &game2player1Cards, &game2player2Cards, ch)
+
+	var input string
+	fmt.Scanln(&input)
 }

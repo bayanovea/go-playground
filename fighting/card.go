@@ -49,3 +49,8 @@ func findRandomAliveCard(cards *[5]Card) *Card {
 
 	return randomCard
 }
+
+func getRandomCardRace() CardRace {
+	// TODO: Remove hardcode 4
+	return CardRace(rand.Intn(4))
+}
