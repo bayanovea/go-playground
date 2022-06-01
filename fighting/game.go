@@ -14,7 +14,7 @@ type Game struct {
 var games []Game
 
 func addNewGame(name string) *Game {
-	var newGame = Game{name: name, status: "new"}
+	newGame := Game{name: name, status: "new"}
 	games = append(games, newGame)
 
 	return &newGame
@@ -23,8 +23,8 @@ func addNewGame(name string) *Game {
 func playGame(game *Game, player1Cards *[5]Card, player2Cards *[5]Card, ch chan string) {
 	game.status = "active"
 
-	var whoseTurn = "player1"
-	var turnNumber int = 1
+	whoseTurn := "player1"
+	turnNumber := 1
 
 	for {
 		println("=====")
@@ -81,11 +81,11 @@ func attack(offensiveCard *Card, defensiveCard *Card) {
 }
 
 func handleAfterTurn(player1Cards *[5]Card, player2Cards *[5]Card) (canFinishGame bool, winner string) {
-	var canFinishGameVar bool = false
 	var winnerVar string
+	canFinishGameVar := false
 
-	var isAllPlayer1CardsDead bool = isAllCardsDead(player1Cards)
-	var isAllPlayer2CardsDead bool = isAllCardsDead(player2Cards)
+	isAllPlayer1CardsDead := isAllCardsDead(player1Cards)
+	isAllPlayer2CardsDead := isAllCardsDead(player2Cards)
 
 	if isAllPlayer1CardsDead || isAllPlayer2CardsDead {
 		canFinishGameVar = true

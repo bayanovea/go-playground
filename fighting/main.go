@@ -9,11 +9,11 @@ func main() {
 
 	var ch chan string = make(chan string)
 
-	var game1 = addNewGame("Game1")
-	var game2 = addNewGame("Game2")
+	game1 := addNewGame("Game1")
+	game2 := addNewGame("Game2")
 
-	var player1 = Player{hash: "player1", name: "Player 1"}
-	var player2 = Player{hash: "player2", name: "Player 2"}
+	player1 := Player{hash: "player1", name: "Player 1"}
+	player2 := Player{hash: "player2", name: "Player 2"}
 
 	addPlayerToGame(game1, player1)
 	addPlayerToGame(game1, player2)

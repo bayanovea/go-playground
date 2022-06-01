@@ -20,7 +20,7 @@ type GameEvent struct {
 }
 
 func startGameEventsLoop() {
-	var gameEventsChannel chan GameEvent = make(chan GameEvent)
+	gameEventsChannel := make(chan GameEvent)
 	_handleGameEvents(gameEventsChannel)
 
 	for {

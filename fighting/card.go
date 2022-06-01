@@ -20,7 +20,7 @@ type Card struct {
 
 func fillCards(cards *[5]Card) {
 	for i := 0; i < len(cards); i++ {
-		var card = Card{rand.Intn(10) + 1, rand.Intn(10) + 1, "alive", rand.Intn(4)}
+		card := Card{rand.Intn(10) + 1, rand.Intn(10) + 1, "alive", rand.Intn(4)}
 		cards[i] = card
 	}
 }
@@ -36,7 +36,7 @@ func isAllCardsDead(cards *[5]Card) bool {
 }
 
 func findRandomAliveCard(cards *[5]Card) *Card {
-	var aliveCardIndexes = make([]int, 0)
+	aliveCardIndexes := make([]int, 0)
 
 	for i := 0; i < len(cards); i++ {
 		if cards[i].status == "alive" {
@@ -44,8 +44,8 @@ func findRandomAliveCard(cards *[5]Card) *Card {
 		}
 	}
 
-	var randomCardIndex int = aliveCardIndexes[rand.Intn(len(aliveCardIndexes))]
-	var randomCard *Card = &cards[randomCardIndex]
+	randomCardIndex := aliveCardIndexes[rand.Intn(len(aliveCardIndexes))]
+	randomCard := &cards[randomCardIndex]
 
 	return randomCard
 }
