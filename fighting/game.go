@@ -13,14 +13,16 @@ type Game struct {
 
 var games []Game
 
-func addNewGame(name string) Game {
+func addNewGame(name string) *Game {
 	var newGame = Game{name: name, status: "new"}
 	games = append(games, newGame)
 
-	return newGame
+	return &newGame
 }
 
-func playGame(game Game, player1Cards *[5]Card, player2Cards *[5]Card) {
+func playGame(game *Game, player1Cards *[5]Card, player2Cards *[5]Card) {
+	game.status = "active"
+
 	var whoseTurn = "player1"
 	var turnNumber int = 1
 
@@ -57,6 +59,7 @@ func playGame(game Game, player1Cards *[5]Card, player2Cards *[5]Card) {
 		canFinishGame, winner = handleAfterTurn(player1Cards, player2Cards)
 
 		if canFinishGame {
+			game.status = "finished"
 			println(winner, " won!")
 			break
 		}

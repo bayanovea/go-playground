@@ -7,11 +7,11 @@ func main() {
 	var player1 = Player{hash: "player1", name: "Player 1"}
 	var player2 = Player{hash: "player2", name: "Player 2"}
 
-	addPlayerToGame(&game1, player1)
-	addPlayerToGame(&game1, player2)
+	addPlayerToGame(game1, player1)
+	addPlayerToGame(game1, player2)
 
-	addPlayerToGame(&game1, player1)
-	addPlayerToGame(&game2, player2)
+	addPlayerToGame(game1, player1)
+	addPlayerToGame(game2, player2)
 
 	var game1player1Cards [5]Card
 	var game1player2Cards [5]Card
